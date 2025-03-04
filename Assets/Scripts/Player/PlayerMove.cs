@@ -20,7 +20,10 @@ public class PlayerMove : MonoBehaviour
     {
         if(z > 0)
         {
-            if(Input.GetKey(KeyCode.LeftShift)) animator.SetInteger("Move", 2);
+            if (Input.GetKey(KeyCode.LeftShift))
+            { 
+                animator.SetInteger("Move", 2);
+            }
             else animator.SetInteger("Move", 1);
         }
         else if(z < 0)
