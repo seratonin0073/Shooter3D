@@ -579,7 +579,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayLenght: 50
-  damage: 10
+  damage: 15
   fireRate: 0.2
   shootEffect: {fileID: 7841396885409405063, guid: 54ee46cafbac57146a74b106977b1a59, type: 3}
   hitEffect: {fileID: 2676027643381584214, guid: 0ef12bc88106f5642b4eee7cb79ed823, type: 3}

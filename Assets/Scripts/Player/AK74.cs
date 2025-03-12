@@ -3,7 +3,7 @@ using UnityEngine;
 public class AK74 : MonoBehaviour
 {
     [SerializeField] private float rayLenght = 50f;
-    [SerializeField] private float damage = 10f;
+    [SerializeField] private int damage = 10;
     [SerializeField] float fireRate = 0.2f;
 
     [SerializeField] ParticleSystem shootEffect;
@@ -34,9 +34,10 @@ public class AK74 : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, rayLenght, ~ignoreLayer))
         {
-            
-            if (hit.collider.gameObject.tag == "Mark") hit.collider.GetComponent<Target>().TakeDamage(damage);
-            Debug.Log("Hit: " + hit.collider.gameObject.name);
+            ZombieMove zombie;
+            if (hit.collider.gameObject.tag == "Mark") hit.collider.GetComponent<Target>().TakeDamage(damage); 
+            if(hit.collider.TryGetComponent<ZombieMove>(out zombie)) zombie.TakeDamage(damage);
+
             GameObject particle = Instantiate(hitEffect.gameObject, hit.point, Quaternion.LookRotation(hit.normal));
             Destroy(particle, 0.5f);
         }
