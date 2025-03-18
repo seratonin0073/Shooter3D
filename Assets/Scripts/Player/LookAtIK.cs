@@ -1,12 +1,12 @@
 using UnityEngine;
 
-using UnityEngine;
 
 public class LookAtIK : MonoBehaviour
 {
-    public Transform lookTarget; // Точка прицілу (наприклад, об'єкт під курсором)
+    public Transform lookTarget; 
     private Animator animator;
 
+    [Range(0f, 1f)] public float weight = 0.3f;
     [Range(0f, 1f)] public float bodyWeight = 0.3f;
     [Range(0f, 1f)] public float headWeight = 0.8f;
     [Range(0f, 1f)] public float eyesWeight = 1f;
@@ -21,7 +21,7 @@ public class LookAtIK : MonoBehaviour
     {
         if (lookTarget != null)
         {
-            animator.SetLookAtWeight(1.0f, bodyWeight, headWeight, eyesWeight, clampWeight);
+            animator.SetLookAtWeight(weight, bodyWeight, headWeight, eyesWeight, clampWeight);
             animator.SetLookAtPosition(lookTarget.position);
         }
     }

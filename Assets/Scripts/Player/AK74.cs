@@ -9,7 +9,7 @@ public class AK74 : MonoBehaviour
     [SerializeField] private float fireRate = 0.2f;
     [SerializeField] private int maxAmmo = 30;
     [SerializeField] private float reloadTime = 2f;
-
+    [SerializeField] private GameObject Muzzle;
     [SerializeField] ParticleSystem shootEffect;
     [SerializeField] ParticleSystem hitEffect;
     [SerializeField] AudioSource shootAudio;
@@ -73,8 +73,14 @@ public class AK74 : MonoBehaviour
             if(hit.collider.TryGetComponent<ZombieMove>(out zombie)) zombie.TakeDamage(damage);
 
             GameObject particle = Instantiate(hitEffect.gameObject, hit.point, Quaternion.LookRotation(hit.normal));
-            Destroy(particle, 0.5f);
+            Destroy(particle, 3f);
         }
 
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(Muzzle.transform.position, Muzzle.transform.forward * -50);
     }
 }
