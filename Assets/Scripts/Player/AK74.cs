@@ -1,10 +1,14 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class AK74 : MonoBehaviour
 {
     [SerializeField] private float rayLenght = 50f;
     [SerializeField] private int damage = 10;
-    [SerializeField] float fireRate = 0.2f;
+    [SerializeField] private float fireRate = 0.2f;
+    [SerializeField] private int maxAmmo = 30;
+    [SerializeField] private float reloadTime = 2f;
 
     [SerializeField] ParticleSystem shootEffect;
     [SerializeField] ParticleSystem hitEffect;
@@ -14,11 +18,30 @@ public class AK74 : MonoBehaviour
 
 
     private float nextTimeToShoot = 0f;
+    private int currentAmmo;
+    private bool isReloading = false;
+    private int extraAmmo = 0;
 
-    
-    
+    public int ExtraAmmo
+    {
+        set { extraAmmo += value; }
+    }
+
+
+    void Start()
+    {
+        currentAmmo = maxAmmo;
+    }
+
     void Update()
     {
+        if (isReloading) return;
+        if ((currentAmmo <= 0 || Input.GetKeyDown(KeyCode.R) && currentAmmo != maxAmmo) && extraAmmo > 0)
+        {
+            StartCoroutine(Reload());
+            return;
+        }
+
         if (Input.GetMouseButton(0) && Time.time >= nextTimeToShoot)
         {
             Shoot();
@@ -27,8 +50,19 @@ public class AK74 : MonoBehaviour
 
     }
 
+    IEnumerator Reload()
+    {
+        isReloading = true;
+        yield return new WaitForSeconds(reloadTime);
+        currentAmmo = maxAmmo;
+        extraAmmo -= maxAmmo;
+        if(extraAmmo < 0) currentAmmo -= extraAmmo;
+        isReloading = false;
+    }
+
     void Shoot()
     {
+        currentAmmo--;
         shootAudio.Play();
         shootEffect.Play();
         RaycastHit hit;

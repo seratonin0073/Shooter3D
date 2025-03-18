@@ -4,18 +4,21 @@ using System.Collections.Generic;
 
 public class ZombieMove : MonoBehaviour
 {
-    [SerializeField] private GameObject Player;
+    [SerializeField] private string playerTag = "Player";
     //[SerializeField] private float speed = 0.5f;
     [SerializeField] private int health = 100;
+    [SerializeField] private int damage = 20;
     
     private List<Rigidbody> GetRigidbodies = new List<Rigidbody>();
     private Animator animator;
     private AnimatorStateInfo animStateInfo;
+    private GameObject Player;
 
 
     void Start()
     {
         animator = GetComponent<Animator>();
+        Player = GameObject.FindGameObjectWithTag(playerTag);
     }
 
     void Update()
@@ -28,6 +31,7 @@ public class ZombieMove : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             animator.SetBool("Attack", true);
+            collision.gameObject.GetComponent<PlayerHealth>().TakeDamage(damage);
         }
     }
 
