@@ -1,16 +1,17 @@
+using System;
 using UnityEngine;
 
 public class CameraRotate : MonoBehaviour
 {
-    Vector2 turn; 
-
+    Vector2 turn;
     [SerializeField] private float mosueSens = 0.5f;//mouse sens
     [SerializeField] private float maxVertialView = 40f;
     [SerializeField] private float mixVertialView = -40f;
 
-    [SerializeField] private GameObject player;
+    private GameObject player;
     void Start()
     {
+        player = transform.parent.gameObject;
         Cursor.lockState = CursorLockMode.Locked;
     }
 
@@ -25,4 +26,6 @@ public class CameraRotate : MonoBehaviour
         player.transform.localRotation = Quaternion.Euler(0, turn.x, 0);
 
     }
+
+    
 }

@@ -4,11 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private Slider hpBar;
+    private Slider hpBar;
     [SerializeField] private int health = 100;
 
     private void Start()
     {
+        hpBar = GameObject.Find("HPBar").GetComponent<Slider>();
         hpBar.maxValue = health;
     }
     void Update()

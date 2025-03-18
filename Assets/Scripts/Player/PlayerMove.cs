@@ -8,7 +8,8 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float sprintSpeed = 4f;
     [SerializeField] private float backwardSpeed = 1f;
     private float currentSpeed;
-
+    Vector2 turn;
+    CameraRotate cameraRotate;
     private Animator animator;
 
     private void Start()
@@ -52,4 +53,6 @@ public class PlayerMove : MonoBehaviour
             animator.SetInteger("Move", 0);
         }
     }
+
+    
 }

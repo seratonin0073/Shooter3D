@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class ZombieMove : MonoBehaviour
 {
+    [SerializeField] private GameObject AmmoBox;
     [SerializeField] private string playerTag = "Player";
     //[SerializeField] private float speed = 0.5f;
     [SerializeField] private int health = 100;
@@ -83,6 +84,11 @@ public class ZombieMove : MonoBehaviour
         {
             RigidbodyIsKineaticOff();
             GetComponent<Collider>().enabled = false;
+            int rnd = Random.Range(0, 100);
+            if(rnd <= 30)
+            {
+                Instantiate(AmmoBox, transform.position, Quaternion.identity);
+            }
         }
     }
 }
