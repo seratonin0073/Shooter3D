@@ -19,7 +19,6 @@ public class LookAtIK : MonoBehaviour
 
     void OnAnimatorIK(int layerIndex)
     {
-        Debug.Log("IK called on layer " + layerIndex);
         if (lookTarget != null)
         {
             animator.SetLookAtWeight(1.0f, bodyWeight, headWeight, eyesWeight, clampWeight);
