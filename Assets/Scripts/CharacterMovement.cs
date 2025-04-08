@@ -42,7 +42,7 @@ public class CharacterMovement : MonoBehaviour
         rotationDirection = camTransform.forward;
 
         RotationNormal();
-        status.isGround = Ground();
+        //status.isGround = Ground();
     }
 
     public void RotationNormal()

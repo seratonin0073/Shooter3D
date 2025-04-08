@@ -5361,6 +5361,7 @@ MonoBehaviour:
   pivot: {fileID: 57798096}
   Character: {fileID: 2485714376016984200}
   mTransform: {fileID: 510769911}
+  cross: {fileID: 1782072989}
   characterStatus: {fileID: 11400000, guid: d6d261fe9b2676941a9de19960daddf0, type: 2}
   cameraConfig: {fileID: 11400000, guid: 950f98ce4afe98442b93f84b14e3e4dd, type: 2}
   leftPivot: 0
@@ -29695,7 +29696,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2969236246806831666}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 40
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}

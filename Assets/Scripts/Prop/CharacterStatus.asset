@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isAniming: 0
   isSprint: 0
-  isGround: 0
+  isGround: 1

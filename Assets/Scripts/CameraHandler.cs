@@ -8,6 +8,7 @@ public class CameraHandler : MonoBehaviour
     public Transform pivot;
     public Transform Character;
     public Transform mTransform;
+    public Transform cross;
 
     public CharacterStatus characterStatus;
     public CameraConfig cameraConfig;
@@ -89,17 +90,29 @@ public class CameraHandler : MonoBehaviour
             smoothY = mouseY;
         }
 
+        
         lookAngle += smoothX * cameraConfig.Y_rot_speed;
         Quaternion targetRot = Quaternion.Euler(0, lookAngle, 0);
+        
+
         mTransform.rotation = targetRot;
 
         titlAngle -= smoothY * cameraConfig.X_rot_speed;
         titlAngle = Mathf.Clamp(titlAngle,cameraConfig.minAngle,cameraConfig.maxAngle);
-        pivot.localRotation = Quaternion.Euler(titlAngle,0,0);
+        
+        if (!characterStatus.isAniming)
+        {
+            pivot.localRotation = Quaternion.Euler(titlAngle, 0, 0);
+        }
+        else
+        {
+            float angle = Vector3.SignedAngle(pivot.position, cross.position, Vector3.up);
+            pivot.localRotation = Quaternion.Euler(titlAngle, angle*2, 0);
+        }
 
     }
 
-    /*private void OnDrawGizmos()
+    private void OnDrawGizmos()
     {
         Vector3 end = camTrans.GetChild(0).position;
         Vector3 e2 = pivot.position - mTransform.position;
@@ -108,6 +121,7 @@ public class CameraHandler : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawRay(camTrans.position, camTrans.forward * distance);
         Gizmos.DrawRay(mTransform.position, e2.normalized * d2);
-    }*/
+        Gizmos.DrawRay(cross.position, cross.up.normalized * 50);
+    }
 
 }
